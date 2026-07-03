@@ -1,0 +1,412 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>HBO Max — Каталог (Adria)</title>
+<style>
+  :root{
+    --bg:#0a0a12; --bg2:#11111d; --panel:#15151f; --panel2:#1c1c2b;
+    --line:#262636; --txt:#ececf3; --muted:#9a9ab0; --muted2:#6f6f86;
+    --acc:#7a5cff; --acc2:#b18cff; --pri:#ffcd4d; --pri-bg:rgba(255,205,77,.12);
+    --chip:#20202e; --chip-on:#7a5cff; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:linear-gradient(180deg,#0c0c16,#08080f 480px) fixed,var(--bg);color:var(--txt);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Inter,Arial,sans-serif;-webkit-font-smoothing:antialiased}
+  a{color:var(--acc2);text-decoration:none}
+  .wrap{max-width:1500px;margin:0 auto;padding:0 20px 80px}
+
+  header{position:sticky;top:0;z-index:30;background:rgba(8,8,15,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+  .hwrap{max-width:1500px;margin:0 auto;padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+  .brand{font-weight:800;font-size:19px;letter-spacing:.3px;white-space:nowrap}
+  .brand .mx{background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .search{flex:1;min-width:240px;position:relative}
+  .search input{width:100%;padding:12px 14px 12px 42px;background:var(--panel2);border:1px solid var(--line);border-radius:12px;color:var(--txt);font-size:15px;outline:none}
+  .search input:focus{border-color:var(--acc)}
+  .search svg{position:absolute;left:13px;top:12px;opacity:.5}
+  .count{color:var(--muted);font-size:13px;white-space:nowrap}
+  .count b{color:var(--txt)}
+
+  .layout{display:grid;grid-template-columns:292px 1fr;gap:26px;margin-top:24px;align-items:start}
+  @media(max-width:900px){.layout{grid-template-columns:1fr}}
+
+  /* sidebar — internally scrollable so the lower facets are always reachable */
+  .side{position:sticky;top:76px;max-height:calc(100vh - 92px);overflow-y:auto;overflow-x:hidden;
+    display:flex;flex-direction:column;gap:16px;padding:2px 8px 20px 2px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+  .side::-webkit-scrollbar{width:9px}
+  .side::-webkit-scrollbar-thumb{background:var(--line);border-radius:8px}
+  .side::-webkit-scrollbar-thumb:hover{background:#363650}
+  @media(max-width:900px){.side{position:static;max-height:none;overflow:visible}}
+  .facet{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 15px}
+  .facet h3{margin:0 0 11px;font-size:12px;letter-spacing:.10em;text-transform:uppercase;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
+  .facet h3 .n{color:var(--muted2);font-weight:600;text-transform:none;letter-spacing:0}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px}
+  .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:999px;border:1px solid var(--line);
+    background:var(--chip);color:var(--txt);cursor:pointer;font-size:12.5px;line-height:1;transition:.12s;user-select:none}
+  .chip:hover{border-color:var(--acc)}
+  .chip .c{color:var(--muted2);font-size:11px;font-variant-numeric:tabular-nums}
+  .chip.on{background:var(--chip-on);border-color:transparent;color:#fff}
+  .chip.on .c{color:rgba(255,255,255,.78)}
+  .chip.pri{border-color:rgba(255,205,77,.45);background:var(--pri-bg)}
+  .chip.pri::before{content:"★";color:var(--pri);font-size:10px;margin-right:-2px}
+  .chip.pri.on{background:var(--chip-on);border-color:transparent}
+  .chip.off{opacity:.32;cursor:default}
+  .chip.off:hover{border-color:var(--line)}
+  .morebtn{margin-top:9px;background:none;border:none;color:var(--acc2);cursor:pointer;font-size:12.5px;padding:2px 0}
+  .ffilter{width:100%;margin-bottom:9px;padding:7px 10px;background:var(--bg2);border:1px solid var(--line);border-radius:9px;color:var(--txt);font-size:12.5px;outline:none}
+  .ffilter:focus{border-color:var(--acc)}
+
+  .yr{display:flex;align-items:center;gap:9px}
+  .yr select{flex:1;padding:8px;background:var(--bg2);border:1px solid var(--line);border-radius:9px;color:var(--txt);font-size:13px;outline:none}
+  .yr span{color:var(--muted2);font-size:12px}
+
+  .clearbtn{padding:10px;border:1px solid var(--line);background:var(--chip);color:var(--muted);border-radius:10px;cursor:pointer;font-size:13px;font-weight:600}
+  .clearbtn:hover{color:var(--txt);border-color:var(--acc)}
+  .sortsel{padding:9px 10px;background:var(--panel2);border:1px solid var(--line);border-radius:10px;color:var(--txt);font-size:13px;outline:none}
+
+  .active{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;min-height:1px}
+  .pill{display:inline-flex;align-items:center;gap:7px;padding:5px 8px 5px 11px;border-radius:999px;background:var(--panel2);border:1px solid var(--line);font-size:12.5px;color:var(--txt)}
+  .pill .k{color:var(--muted2)}
+  .pill button{background:none;border:none;color:var(--muted);cursor:pointer;font-size:14px;line-height:1;padding:0 2px}
+  .pill button:hover{color:#fff}
+
+  .toolbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:14px;flex-wrap:wrap}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;transition:.14s}
+  .card:hover{transform:translateY(-4px);border-color:var(--acc);box-shadow:0 12px 30px rgba(0,0,0,.45)}
+  .poster{position:relative;aspect-ratio:2/3;background:var(--panel2);overflow:hidden}
+  .poster img{width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .35s}
+  .poster img.ld{opacity:1}
+  .badges{position:absolute;top:8px;left:8px;display:flex;gap:5px;flex-wrap:wrap}
+  .b{font-size:10px;font-weight:700;padding:3px 7px;border-radius:6px;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);letter-spacing:.04em}
+  .b.movie{color:#9fd0ff}.b.series{color:#c5a8ff}.b.kids{color:#9be8b6}
+  .agebadge{position:absolute;top:8px;right:8px;font-size:10.5px;font-weight:800;min-width:22px;text-align:center;padding:3px 5px;border-radius:6px;
+    background:rgba(0,0,0,.62);backdrop-filter:blur(4px);color:#fff;border:1px solid rgba(255,255,255,.22)}
+  .langflag{position:absolute;bottom:8px;left:8px;display:flex;gap:4px}
+  .langflag .lf{font-size:10px;font-weight:700;padding:3px 6px;border-radius:6px;background:rgba(122,92,255,.85);color:#fff}
+  .langflag .lf.sub{background:rgba(0,0,0,.62);color:#ffcd4d}
+  .meta{padding:10px 11px 12px;display:flex;flex-direction:column;gap:5px;flex:1}
+  .meta .t{font-size:13.5px;font-weight:700;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .meta .sub{font-size:11.5px;color:var(--muted2);display:flex;gap:7px;flex-wrap:wrap}
+  .meta .d{font-size:11.5px;color:var(--muted);line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-top:1px}
+
+  .empty{text-align:center;color:var(--muted);padding:80px 20px}
+  .sentinel{height:40px}
+  .loading{text-align:center;color:var(--muted);padding:60px}
+
+  .modal{position:fixed;inset:0;z-index:60;background:rgba(4,4,9,.75);backdrop-filter:blur(6px);display:none;align-items:center;justify-content:center;padding:24px}
+  .modal.open{display:flex}
+  .sheet{background:var(--panel);border:1px solid var(--line);border-radius:18px;max-width:820px;width:100%;max-height:88vh;overflow:auto;display:grid;grid-template-columns:280px 1fr}
+  @media(max-width:680px){.sheet{grid-template-columns:1fr}}
+  .sheet .pimg{aspect-ratio:2/3;background:var(--panel2)}
+  .sheet .pimg img{width:100%;height:100%;object-fit:cover;display:block}
+  .sheet .body{padding:22px 24px 26px;position:relative}
+  .sheet h2{margin:0 0 4px;font-size:23px;line-height:1.15}
+  .sheet .orig{color:var(--muted2);font-size:13px;margin-bottom:12px}
+  .sheet .row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;color:var(--muted);font-size:13px;align-items:center}
+  .sheet .row .dot{color:var(--muted2)}
+  .sheet .age{font-weight:800;color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:6px;padding:1px 7px;font-size:12px}
+  .sheet p.desc{color:#cfcfe0;line-height:1.55;font-size:14px;margin:0 0 18px}
+  .sheet .lblock{margin-bottom:14px}
+  .sheet .lblock .lh{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:7px}
+  .sheet .llist{display:flex;flex-wrap:wrap;gap:6px}
+  .sheet .ll{font-size:12px;padding:4px 9px;border-radius:7px;background:var(--chip);border:1px solid var(--line)}
+  .sheet .ll.pri{border-color:rgba(255,205,77,.5);background:var(--pri-bg);color:#ffe6a3}
+  .watch{display:inline-flex;align-items:center;gap:8px;margin-top:6px;padding:11px 18px;border-radius:11px;background:linear-gradient(90deg,var(--acc),#6347e6);color:#fff;font-weight:700;font-size:14px}
+  .xbtn{position:absolute;top:14px;right:16px;background:var(--chip);border:1px solid var(--line);color:var(--txt);width:34px;height:34px;border-radius:9px;cursor:pointer;font-size:18px;line-height:1}
+  .foot{margin-top:60px;color:var(--muted2);font-size:12px;text-align:center;line-height:1.6}
+</style>
+</head>
+<body>
+<header>
+  <div class="hwrap">
+    <div class="brand"><span class="mx">HBO Max</span> · Каталог</div>
+    <div class="search">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="q" type="search" placeholder="Поиск по названию или описанию…" autocomplete="off">
+    </div>
+    <div class="count" id="count">…</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="layout">
+    <aside class="side">
+      <div class="facet">
+        <h3>Тип</h3>
+        <div class="chips" id="typeChips"></div>
+      </div>
+
+      <div class="facet">
+        <h3>Год выпуска</h3>
+        <div class="yr"><select id="yrFrom"></select><span>—</span><select id="yrTo"></select></div>
+      </div>
+
+      <div class="facet">
+        <h3>Озвучка / аудио <span class="n">любой из выбранных</span></h3>
+        <input class="ffilter" id="audFilter" placeholder="найти язык…" autocomplete="off">
+        <div class="chips" id="audChips"></div>
+        <button class="morebtn" id="audMore" hidden></button>
+      </div>
+
+      <div class="facet">
+        <h3>Субтитры <span class="n">любой из выбранных</span></h3>
+        <input class="ffilter" id="subFilter" placeholder="найти язык…" autocomplete="off">
+        <div class="chips" id="subChips"></div>
+        <button class="morebtn" id="subMore" hidden></button>
+      </div>
+
+      <div class="facet">
+        <h3>Жанр</h3>
+        <div class="chips" id="genChips"></div>
+        <button class="morebtn" id="genMore" hidden></button>
+      </div>
+
+      <button class="clearbtn" id="clearAll">Сбросить все фильтры</button>
+    </aside>
+
+    <main>
+      <div class="active" id="activePills"></div>
+      <div class="toolbar">
+        <div class="count" id="count2"></div>
+        <select class="sortsel" id="sort" title="Популярность — из открытого датасета TMDb (HBO её не отдаёт)">
+          <option value="pop">Сначала популярные</option>
+          <option value="year-d">Сначала новые</option>
+          <option value="year">Сначала старые</option>
+          <option value="title">По названию (А→Я)</option>
+          <option value="title-d">По названию (Я→А)</option>
+        </select>
+      </div>
+      <div class="grid" id="grid"></div>
+      <div class="sentinel" id="sentinel"></div>
+      <div class="empty" id="empty" hidden>Ничего не найдено. Попробуйте снять часть фильтров.</div>
+      <div class="loading" id="loading">Загрузка каталога…</div>
+      <div class="foot" id="foot"></div>
+    </main>
+  </div>
+</div>
+
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+
+<script>
+"use strict";
+const PRI_RE=[/^serbian/i,/^croatian/i,/^bosnian/i,/^montenegrin/i,/^russian/i];
+const PRI=s=>PRI_RE.some(re=>re.test(s));
+const stripRole=s=>String(s||"").replace(/\s*-\s*(Original|Audio Description|SDH)\s*$/i,"").trim();
+const audNorm=s=>stripRole(s).replace(/\s*\((Cyrillic|Latin)\)\s*/i,"").trim(); // audio: drop script qualifier (spoken language has no script)
+const subNorm=s=>stripRole(s);                                                   // subtitles: keep script (Latin/Cyrillic matters)
+const fold=s=>String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"");
+const CDN_W="?width=360";
+const $=id=>document.getElementById(id);
+const esc=s=>String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+const state={q:"",type:null,kids:false,audio:new Set(),subs:new Set(),genres:new Set(),yrFrom:null,yrTo:null,sort:"pop"};
+let DATA=[], FILT=[], rendered=0; const BATCH=60;
+let facetAudio, facetSubs, facetGen;
+
+// ---- matching: AND everywhere; `skip` excludes a facet so it can count its own alternatives ----
+function matches(t, skip){
+  skip=skip||{};
+  if(!skip.type && state.type && t.type!==state.type) return false;
+  if(!skip.kids && state.kids && !t.kids) return false;
+  if(!skip.year){ if(state.yrFrom&&(!t.year||t.year<state.yrFrom))return false; if(state.yrTo&&(!t.year||t.year>state.yrTo))return false; }
+  if(!skip.audio && state.audio.size){ let ok=false; for(const L of state.audio) if(t._a.has(L)){ok=true;break;} if(!ok) return false; } // OR: any selected
+  if(!skip.subs && state.subs.size){ let ok=false; for(const L of state.subs) if(t._s.has(L)){ok=true;break;} if(!ok) return false; } // OR: any selected
+  if(!skip.genres && state.genres.size){ for(const g of state.genres) if(!t._g.has(g)) return false; } // AND
+  if(!skip.q && state.q){ if(!t._txt.includes(state.q)) return false; }
+  return true;
+}
+
+function buildFacetItems(getSet){
+  const c=new Map();
+  for(const t of DATA) for(const v of getSet(t)) c.set(v,(c.get(v)||0)+1);
+  return [...c.keys()].map(name=>({name,pri:PRI(name),g:c.get(name)}))
+    .sort((a,b)=>(b.pri-a.pri)||(b.g-a.g)||a.name.localeCompare(b.name));
+}
+
+function makeFacet(stateKey, items, chipsEl, moreEl, filterEl, limit){
+  limit=limit||14; let expanded=false, ff="", lastCounts=new Map();
+  function render(counts){
+    if(counts) lastCounts=counts; counts=lastCounts;
+    const q=fold(ff);
+    let list=items.filter(it=>!q||fold(it.name).includes(q)).map(it=>({...it,c:counts.get(it.name)||0}));
+    let vis=list.filter(it=>it.c>0||state[stateKey].has(it.name)||it.pri);
+    const total=vis.length;
+    if(!expanded&&!q) vis=vis.slice(0,limit);
+    chipsEl.innerHTML="";
+    for(const it of vis){
+      const sel=state[stateKey].has(it.name), zero=it.c===0&&!sel;
+      const b=document.createElement("button");
+      b.className="chip"+(it.pri?" pri":"")+(sel?" on":"")+(zero?" off":"");
+      b.innerHTML=`${esc(it.name)} <span class="c">${it.c}</span>`;
+      if(!zero) b.onclick=()=>{ sel?state[stateKey].delete(it.name):state[stateKey].add(it.name); apply(); };
+      chipsEl.appendChild(b);
+    }
+    if(!q&&total>limit){moreEl.hidden=false;moreEl.textContent=expanded?"Свернуть":("Показать все ("+total+")");}
+    else moreEl.hidden=true;
+  }
+  moreEl.onclick=()=>{expanded=!expanded;render();};
+  if(filterEl) filterEl.oninput=()=>{ff=filterEl.value;render();};
+  return {render};
+}
+
+function renderType(cm,cs,ck){
+  const el=$("typeChips"); el.innerHTML="";
+  const mk=(label,count,active,onclick)=>{const zero=count===0&&!active;const b=document.createElement("button");
+    b.className="chip"+(active?" on":"")+(zero?" off":"");b.innerHTML=`${label} <span class="c">${count}</span>`;
+    if(!zero) b.onclick=onclick; el.appendChild(b);};
+  mk("Фильмы",cm,state.type==='movie',()=>{state.type=state.type==='movie'?null:'movie';apply();});
+  mk("Сериалы",cs,state.type==='series',()=>{state.type=state.type==='series'?null:'series';apply();});
+  mk("Детское",ck,state.kids,()=>{state.kids=!state.kids;apply();});
+}
+
+function buildYears(){
+  const ys=DATA.map(t=>t.year).filter(Boolean).sort((a,b)=>a-b);
+  if(!ys.length) return;
+  const min=ys[0],max=ys[ys.length-1],f=$("yrFrom"),tt=$("yrTo");
+  let o='<option value="">с</option>'; for(let y=min;y<=max;y++)o+=`<option value="${y}">${y}</option>`; f.innerHTML=o;
+  o='<option value="">по</option>'; for(let y=max;y>=min;y--)o+=`<option value="${y}">${y}</option>`; tt.innerHTML=o;
+  f.onchange=()=>{state.yrFrom=f.value?+f.value:null;apply();};
+  tt.onchange=()=>{state.yrTo=tt.value?+tt.value:null;apply();};
+}
+
+// ---- main apply: filter -> dynamic counts on ALL facets -> render ----
+function apply(){
+  FILT=DATA.filter(t=>matches(t));
+  sortFilt();
+  // audio & subs are OR facets → count over results IGNORING their own selection (so counts stay meaningful);
+  // genres (AND) count over the filtered results.
+  const ca=new Map(),cs=new Map(),cg=new Map();
+  for(const t of DATA){ if(matches(t,{audio:1})) for(const L of t._a) ca.set(L,(ca.get(L)||0)+1); }
+  for(const t of DATA){ if(matches(t,{subs:1}))  for(const L of t._s) cs.set(L,(cs.get(L)||0)+1); }
+  for(const t of FILT) for(const g of t._g) cg.set(g,(cg.get(g)||0)+1);
+  // type/kids counts: ignore own facet so the chip shows its alternative total
+  let cm=0,cse=0; for(const t of DATA) if(matches(t,{type:1})){ if(t.type==='movie')cm++; else cse++; }
+  let ck=0; for(const t of DATA) if(t.kids&&matches(t,{kids:1})) ck++;
+  renderType(cm,cse,ck);
+  facetAudio.render(ca); facetSubs.render(cs); facetGen.render(cg);
+  const n=FILT.length;
+  $("count").innerHTML=`<b>${n.toLocaleString("ru")}</b> из ${DATA.length.toLocaleString("ru")}`;
+  $("count2").innerHTML=`Найдено: <b>${n.toLocaleString("ru")}</b>`;
+  $("empty").hidden=n>0;
+  syncActive();
+  resetGrid();
+}
+function sortFilt(){
+  const s=state.sort;
+  FILT.sort((a,b)=>{
+    if(s==="pop")return (b.pop||0)-(a.pop||0)||(b.year||0)-(a.year||0)||a.title.localeCompare(b.title);
+    if(s==="title")return a.title.localeCompare(b.title);
+    if(s==="title-d")return b.title.localeCompare(a.title);
+    if(s==="year-d")return (b.year||0)-(a.year||0)||a.title.localeCompare(b.title);
+    if(s==="year")return (a.year||0)-(b.year||0)||a.title.localeCompare(b.title);
+  });
+}
+function resetGrid(){ $("grid").innerHTML=""; rendered=0; renderMore(); }
+function renderMore(){
+  const slice=FILT.slice(rendered,rendered+BATCH), frag=document.createDocumentFragment();
+  for(const t of slice) frag.appendChild(card(t));
+  $("grid").appendChild(frag); rendered+=slice.length;
+}
+function langFlags(t){
+  const aPri=[...t._a].filter(PRI), sPri=[...t._s].filter(PRI);
+  let h="";
+  if(aPri.length) h+=`<span class="lf" title="Аудио: ${esc(aPri.join(", "))}">AUD</span>`;
+  if(sPri.length) h+=`<span class="lf sub" title="Субтитры: ${esc(sPri.join(", "))}">SUB</span>`;
+  return h?`<div class="langflag">${h}</div>`:"";
+}
+function card(t){
+  const el=document.createElement("div"); el.className="card";
+  const lbl=t.type==="movie"?"ФИЛЬМ":"СЕРИАЛ";
+  el.innerHTML=`
+    <div class="poster">
+      <div class="badges"><span class="b ${t.type}">${lbl}</span>${t.kids?'<span class="b kids">ДЕТСКОЕ</span>':""}</div>
+      ${t.cover?`<img loading="lazy" src="${t.cover}${CDN_W}" alt="">`:""}
+      ${langFlags(t)}
+    </div>
+    <div class="meta">
+      <div class="t">${esc(t.title)}</div>
+      <div class="sub">${t.year?`<span>${t.year}</span>`:""}${t.type==="series"&&t.seasons?`<span>${t.seasons} сез.</span>`:""}</div>
+      <div class="d">${esc(t.desc||"")}</div>
+    </div>`;
+  const img=el.querySelector("img"); if(img) img.addEventListener("load",()=>img.classList.add("ld"));
+  el.onclick=()=>openModal(t);
+  return el;
+}
+
+function openModal(t){
+  const aud=[...t._a].sort((a,b)=>(PRI(b)-PRI(a))||a.localeCompare(b));
+  const sub=[...t._s].sort((a,b)=>(PRI(b)-PRI(a))||a.localeCompare(b));
+  const chip=l=>`<span class="ll${PRI(l)?" pri":""}">${esc(l)}</span>`;
+  $("sheet").innerHTML=`
+    <div class="pimg">${t.cover?`<img src="${t.cover}?width=500" alt="">`:""}</div>
+    <div class="body">
+      <button class="xbtn" onclick="closeModal()">×</button>
+      <h2>${esc(t.title)}</h2>
+      ${t.original&&t.original!==t.title?`<div class="orig">${esc(t.original)}</div>`:""}
+      <div class="row">
+        <span>${t.type==="movie"?"Фильм":"Сериал"}</span>
+        ${t.year?`<span class="dot">·</span><span>${t.year}</span>`:""}
+        ${t.type==="series"&&t.seasons?`<span class="dot">·</span><span>${t.seasons} сезон(ов)${t.episodes?`, ${t.episodes} эп.`:""}</span>`:""}
+        ${t.rating?`<span class="dot">·</span><span class="age" title="Возрастной рейтинг">${esc(t.rating)}</span>`:""}
+        ${t.kids?`<span class="dot">·</span><span>Детское</span>`:""}
+        ${t.genres&&t.genres.length?`<span class="dot">·</span><span>${esc(t.genres.join(", "))}</span>`:""}
+      </div>
+      <p class="desc">${esc(t.desc||"Описание отсутствует.")}</p>
+      <div class="lblock"><div class="lh">Аудио (${aud.length})</div><div class="llist">${aud.map(chip).join("")||"<span class='ll'>—</span>"}</div></div>
+      <div class="lblock"><div class="lh">Субтитры (${sub.length})</div><div class="llist">${sub.map(chip).join("")||"<span class='ll'>—</span>"}</div></div>
+      <a class="watch" href="${t.url}" target="_blank" rel="noopener">Открыть на HBO Max ↗</a>
+    </div>`;
+  $("modal").classList.add("open");
+}
+function closeModal(){$("modal").classList.remove("open");}
+$("modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+
+function syncActive(){
+  const el=$("activePills"); el.innerHTML="";
+  const add=(kind,label,onx)=>{const p=document.createElement("span");p.className="pill";
+    p.innerHTML=`<span class="k">${kind}:</span> ${esc(label)} <button>×</button>`;p.querySelector("button").onclick=onx;el.appendChild(p);};
+  if(state.type)add("Тип",state.type==='movie'?"Фильмы":"Сериалы",()=>{state.type=null;apply();});
+  if(state.kids)add("","Детское",()=>{state.kids=false;apply();});
+  if(state.yrFrom||state.yrTo)add("Год",`${state.yrFrom||"…"}–${state.yrTo||"…"}`,()=>{state.yrFrom=state.yrTo=null;$("yrFrom").value="";$("yrTo").value="";apply();});
+  for(const a of state.audio)add("Аудио",a,()=>{state.audio.delete(a);apply();});
+  for(const s of state.subs)add("Субтитры",s,()=>{state.subs.delete(s);apply();});
+  for(const g of state.genres)add("Жанр",g,()=>{state.genres.delete(g);apply();});
+}
+
+function clearAll(){
+  state.q="";state.type=null;state.kids=false;state.audio.clear();state.subs.clear();state.genres.clear();state.yrFrom=state.yrTo=null;
+  $("q").value="";$("yrFrom").value="";$("yrTo").value="";
+  apply();
+}
+
+$("q").addEventListener("input",e=>{clearTimeout(window.__qt);window.__qt=setTimeout(()=>{state.q=fold(e.target.value);apply();},140);});
+$("sort").addEventListener("change",e=>{state.sort=e.target.value;sortFilt();resetGrid();});
+$("clearAll").addEventListener("click",clearAll);
+new IntersectionObserver(es=>{for(const en of es)if(en.isIntersecting&&rendered<FILT.length)renderMore();},{rootMargin:"600px"}).observe($("sentinel"));
+
+fetch("./catalog.json").then(r=>r.json()).then(j=>{
+  DATA=(j.titles||j).map(t=>{
+    t._a=new Set((t.audio||[]).map(audNorm).filter(Boolean));
+    t._s=new Set((t.subs||[]).map(subNorm).filter(Boolean));
+    t._g=new Set(t.genres||[]);
+    t._txt=fold([t.title,t.original,t.desc].join(" "));
+    return t;
+  });
+  $("loading").hidden=true;
+  facetAudio=makeFacet("audio",buildFacetItems(t=>t._a),$("audChips"),$("audMore"),$("audFilter"));
+  facetSubs =makeFacet("subs", buildFacetItems(t=>t._s),$("subChips"),$("subMore"),$("subFilter"));
+  facetGen  =makeFacet("genres",buildFacetItems(t=>t._g),$("genChips"),$("genMore"),null,12);
+  buildYears();
+  apply();
+  const meta=j.generated?` · данные от ${j.generated}`:"";
+  $("foot").innerHTML=`Каталог HBO Max — регион ${j.region||"Adria"} · ${DATA.length.toLocaleString("ru")} тайтлов${meta}.<br>`+
+    `Рейтинг = возрастной. Сортировка по популярности — из открытого датасета TMDb. Метаданные и обложки © Warner Bros. Discovery — для личного пользования.`;
+}).catch(e=>{$("loading").textContent="Не удалось загрузить catalog.json: "+e.message;});
+</script>
+</body>
+</html>

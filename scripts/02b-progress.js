@@ -1,0 +1,2 @@
+/* Poll harvest progress (run repeatedly; wait ~30-60s between calls until finished:true, done==total). */
+(()=>{const S=window.__S;if(S&&S.t){const all=Object.values(S.t);return{src:'mem',done:all.filter(t=>t.ld).length,total:all.length,running:!!window.__hbRunning,finished:!!window.__hbDone,throttled:!!window.__hbThrottle,errs:window.__hbErr||0,quota:window.__hbQuota||null};}let L;try{L=JSON.parse(localStorage.getItem('hbocat_v1'));}catch(e){}if(L&&L.t){const all=Object.values(L.t);return{src:'ls',done:all.filter(t=>t.ld).length,total:all.length};}return 'no-state';})()

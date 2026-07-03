@@ -1,0 +1,150 @@
+# HBO Max (Serbia / Adria) — titles with Serbian or Croatian AUDIO
+
+Generated from the HBO Max content API for the logged-in account. Region: Serbia (EMEA/Adria).
+NATIVE = original Serbian/Croatian/Bosnian-language production (best for learning). DUB = dubbed (mostly kids/animation).
+
+### NATIVE — Movies (Serbian/Croatian/Bosnian original audio) (48)
+- A Brief Excursion — Croatian (orig.) — _drama_
+- All the Best — Croatian — _romance, comedy, european_
+- Baci se na pod — Croatian (orig.) — _european, drama_
+- Bitka kod Siska 1593. godine — Croatian (orig.) — _documentary_
+- Comic Sans — Croatian (orig.) — _comedy, european_
+- Daddy — Croatian (orig.) — _drama, european_
+- Djecak — Croatian (orig.) — _drama_
+- Dnevnik Pauline P. — Croatian (orig.) — _family, european_
+- Dražen — Croatian (orig.) — _sports, drama_
+- Even Pigs Go to Heaven — Croatian — _comedy, european_
+- Fine Dead Girls — Croatian (orig.) — _drama_
+- Frka — Croatian (orig.) — _drama, comedy_
+- Good Times, Bad Times — Croatian (orig.) — _drama_
+- Hotel Pula — Croatian — _drama, romance_
+- Hush... — Croatian — _drama, european_
+- Ivan's Game — Croatian (orig.) — _sports, documentary_
+- Izgubljeni Dream Team — Croatian (orig.) — _sports, documentary_
+- Jan — Bosnian (orig.) — _drama, romance, european_
+- Juzina — Serbian (Cyrillic), Croatian — _drama, comedy, european_
+- Life Is a Trumpet — Croatian (orig.) — _drama, comedy_
+- Love or Death — Croatian (orig.) — _drama, family, european_
+- Mali — Croatian (orig.) — _drama_
+- Megdan: Between Water and Fire — Serbian (Cyrillic) — _sports, action_
+- Mother of Asphalt — Croatian (orig.) — _drama, european_
+- My Late Summer — Croatian (orig.) — _drama, romance, comedy, european_
+- One Shot — Croatian — _drama, european_
+- Only When I Laugh — Croatian (orig.) — _drama, european_
+- Po tamburi — Croatian (orig.) — _action, comedy, european_
+- Polako nikuda — Croatian (orig.) — _drama_
+- Proslava — Croatian (orig.) — _drama_
+- Salsa — Croatian (orig.) — _horror, comedy_
+- Sami — Croatian (orig.) — _drama, european_
+- Sedmo nebo — Croatian (orig.) — _comedy, european_
+- Šuma Summarum — Croatian — _comedy, european_
+- Tereza 37 — Croatian (orig.) — _drama_
+- The Avalanche — Croatian (orig.) — _comedy, european_
+- The Blue Lions — Serbian (Cyrillic) — _documentary, sports_
+- The Diary of Diana B — Croatian (orig.) — _drama, european_
+- The Eighth Commissioner — Croatian (orig.) — _drama, comedy, european_
+- The Last Serb in Croatia — Croatian (orig.) — _horror, comedy_
+- The Man Who Could Not Remain Silent — Croatian (orig.) — _drama, european_
+- The Mysterious Boy — Croatian (orig.) — _family_
+- The Mystery of Green Hill — Croatian (orig.) — _family, european_
+- The Reaper — Croatian (orig.) — _drama, european_
+- The Sky Above Zenica — Bosnian (orig.) — _documentary, european_
+- The Uncle — Croatian (orig.) — _drama, european_
+- The Woman with the Rubber Gloves — Croatian (orig.) — _drama_
+- Vis-à-vis — Croatian (orig.) — _drama, european_
+
+### NATIVE — Series (8)
+- Awake — Serbian (Cyrillic) — _crime, european, drama_
+- Children of Evil — Serbian (Cyrillic) — _drama, european_
+- Golden Boy — Serbian (Cyrillic), Serbian (Cyrillic) (orig.) — _sports, drama, european_
+- Legacy — Serbian (Cyrillic) — _action, crime, european_
+- Novine — Croatian (orig.) — _crime, drama, european_
+- Operation Sabre — Serbian (Cyrillic) — _crime, drama, european_
+- The Silence — Croatian (orig.) — _crime, drama, european_
+- Walking with the Lion — Serbian (Cyrillic) — _european, drama_
+
+### DUB — Movies (dubbed into Serbian/Croatian) (31)
+- A Minecraft Movie — Croatian, Serbian (Cyrillic) — _family, comedy_
+- A Minecraft Movie (Block Party Edition) — Croatian — _family, comedy_
+- A Minecraft Movie (with ASL) — Croatian, Serbian (Cyrillic) — _family, comedy_
+- Ben 10 Vs. The Universe: The Movie — Croatian — _family_
+- Ben 10: Alien X-Tinction — Croatian — _family_
+- Ben 10: Ben 10,010 — Croatian — _family_
+- Ben 10: Ben Gen 10 — Croatian — _family_
+- Craig Before the Creek — Croatian — _family_
+- Dr. Seuss' The Grinch — Serbian (Cyrillic), Croatian — _family, comedy_
+- How To Train Your Dragon — Croatian — _family_
+- How to Train Your Dragon 2 — Serbian (Cyrillic), Croatian — _family_
+- How to Train Your Dragon: The Hidden World — Serbian (Cyrillic), Croatian — _family_
+- Kung Fu Panda 4 — Serbian (Cyrillic), Croatian — _family, comedy_
+- Lu & The Bally Bunch: Bug Nollig — Croatian — _family_
+- Master Moley By Royal Invitation — Croatian — _family, european_
+- Merry Madagascar — Croatian — _family, comedy_
+- Migration — Serbian (Cyrillic), Croatian — _family_
+- Paddington in Peru — Croatian, Serbian (Cyrillic) — _family, comedy_
+- Penguins of Madagascar — Croatian, Serbian (Cyrillic) — _family, comedy_
+- Shrek the Halls — Croatian — _family, comedy_
+- Spider-Man: Across the Spider-Verse — Serbian (Cyrillic), Croatian — _family_
+- Spider-Man: Into the Spider-Verse — Serbian (Cyrillic), Croatian — _family_
+- The Angry Birds Movie — Croatian, Serbian (Cyrillic) — _family_
+- The Angry Birds Movie 2 — Serbian (Cyrillic), Croatian — _family_
+- The Ghost of Lord Farquaad — Croatian — _family, comedy_
+- Thomas & Friends: Race For The Sodor Cup — Croatian — _family_
+- Thomas & Friends: The Mystery of Lookout Mountain — Croatian — _family_
+- Trolls — Serbian (Cyrillic), Croatian — _family, comedy_
+- Trolls Band Together — Serbian (Cyrillic) — _family, comedy_
+- Trolls World Tour — Serbian (Cyrillic), Croatian — _family, comedy_
+- We Bare Bears: The Movie — Croatian — _family, comedy_
+
+### DUB — Series (51)
+- Adventure Time: Distant Lands — Croatian — _kids-family_
+- Alice & Lewis — Croatian — _kids-family_
+- Apple & Onion — Croatian — _comedy, kids-family_
+- Baby Lemmings — Croatian — _european, kids-family_
+- Barney's World — Croatian — _kids-family_
+- Batwheels — Croatian — _kids-family_
+- Ben 10 — Croatian — _kids-family, action_
+- Bugs Bunny Builders — Croatian — _kids-family_
+- Bugs Bunny Builders: Hard Hat Time — Croatian — _kids-family_
+- Care Bears: Unlock the Magic Specials — Croatian — _kids-family_
+- CN Stories — Croatian — _kids-family, european_
+- Craig of the Creek — Croatian — _kids-family_
+- Goat Girl — Croatian — _kids-family, comedy, european_
+- Gremlins: Secrets of the Mogwai — Croatian — _kids-family_
+- Hero Inside — Croatian — _kids-family_
+- Interstellar Ella — Croatian — _fantasy-sci-fi, kids-family_
+- Jade Armor — Croatian — _action, european, kids-family_
+- Jellystone! — Croatian — _kids-family_
+- Jessica's Big Little World — Croatian — _kids-family_
+- Krypto Saves the Day! — Croatian — _kids-family_
+- Lana Longbeard — Croatian — _european, kids-family_
+- LEGO DREAMZzz — Croatian — _kids-family_
+- LEGO Ninjago: Dragons Rising — Croatian — _action, kids-family_
+- Looney Tunes Cartoons — Croatian — _kids-family_
+- Lu & the Bally Bunch — Croatian — _kids-family_
+- Lu & The Bally Bunch Shorts — Croatian — _kids-family_
+- Lucas the Spider — Croatian — _comedy, kids-family_
+- Meet the Batwheels — Croatian — _kids-family_
+- Moley — Croatian — _european, kids-family_
+- Mr Bean: The Animated Series — Croatian — _kids-family_
+- Mr. Magoo — Croatian — _kids-family_
+- Mush-Mush and the Mushables — Croatian — _kids-family_
+- Ninjago — Croatian — _action, kids-family_
+- Peppa Pig — Croatian — _european, kids-family_
+- Pocoyó — Croatian — _european, kids-family_
+- Regular Show: The Lost Tapes — Croatian — _comedy, kids-family_
+- Silly Sundays — Croatian — _kids-family_
+- Steven Universe Future — Croatian — _fantasy-sci-fi, kids-family_
+- Summer Camp Island — Croatian — _fantasy-sci-fi, kids-family_
+- Teen Titans Go! — Croatian — _kids-family_
+- The Amazing World of Gumball — Croatian — _comedy, kids-family_
+- The Amazing World of Gumball: Darwin's Yearbook — Croatian — _kids-family_
+- The Heroic Quest of the Valiant Prince Ivandoe — Croatian — _comedy, european, kids-family_
+- The Powerpuff Girls — Croatian — _comedy, kids-family_
+- The Wonderfully Weird World of Gumball — Croatian — _comedy, kids-family_
+- Thomas & Friends — Croatian — _kids-family_
+- Tiny Toons Looniversity — Croatian — _comedy, kids-family_
+- Tom and Jerry in New York — Croatian — _kids-family_
+- Totally Spies! — Croatian — _kids-family_
+- We Baby Bears — Croatian — _comedy, kids-family_
+- We Bare Bears — Croatian — _comedy, kids-family_
